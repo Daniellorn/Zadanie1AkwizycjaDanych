@@ -12,7 +12,6 @@ import math
 
 pattern = os.path.join(os.path.abspath('Dane'), '*.txt')
 
-#ai
 words_to_remove = {
     "i", "oraz", "a", "ale", "lecz", "lub", "albo", "bądź",
     "ani", "ni", "czy", "zaś", "natomiast", "jednak", "więc",
@@ -141,7 +140,7 @@ def run_pipeline():
             | "Optymalizacja" >> beam.Reshuffle()
         )
 
-        # to daje (id, dokument, tekst)
+        # to daje (id, nazwa, tekst)
         files_and_contents = (
             readable_files
             | "Czyta i dzieli przekazany plik" >> beam.Map(lambda x: (uuid.uuid4(), x.metadata.path, x.read_utf8()))
